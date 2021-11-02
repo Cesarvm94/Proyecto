@@ -1,0 +1,715 @@
+SET TERMOUT OFF;
+SET SERVEROUTPUT ON;
+SET TIMING ON;
+SPOOL ruta\salida.txt;
+
+prompt ***********1.1-INICIO*****************
+
+SELECT cta.* 
+FROM contratista cta JOIN contrato co ON cta.concod=co.concod JOIN conobra con ON con.concod=cta.concod JOIN obra o ON o.obrcod=con.obrcod 
+JOIN municipio mu ON mu.muncod=o.muncod
+WHERE mu.munnom = 'Bucaramanga ' AND ROWNUM <=2500;
+
+SELECT cta.* 
+FROM contratista cta JOIN contrato co ON cta.concod=co.concod JOIN conobra con ON con.concod=cta.concod JOIN obra o ON o.obrcod=con.obrcod 
+JOIN municipio mu ON mu.muncod=o.muncod
+WHERE mu.munnom != 'Bucaramanga' AND ROWNUM <=2500;
+
+SELECT cta.* 
+FROM contratista cta JOIN contrato co ON cta.concod=co.concod JOIN conobra con ON con.concod=cta.concod JOIN obra o ON o.obrcod=con.obrcod 
+JOIN municipio mu ON mu.muncod=o.muncod
+WHERE mu.munnom LIKE 'Bucar%' AND ROWNUM <=2500;
+
+prompt *************1.1-FIN*******************
+
+prompt *************1.2-INICIO*******************
+
+SELECT tpl.* 
+FROM tipolector tpl JOIN dispositivo disp ON tpl.tiplcod=disp.tiplcod JOIN obradispo odisp ON odisp.discod=disp.discod 
+JOIN obra o ON o.obrcod=odisp.obrcod JOIN municipio m ON m.muncod=o.muncod JOIN departamento d ON d.depcod=m.depcod
+WHERE d.depnom = 'Santander' AND ROWNUM <=2500;
+
+SELECT tpl.* 
+FROM tipolector tpl JOIN dispositivo disp ON tpl.tiplcod=disp.tiplcod JOIN obradispo odisp ON odisp.discod=disp.discod 
+JOIN obra o ON o.obrcod=odisp.obrcod JOIN municipio m ON m.muncod=o.muncod JOIN departamento d ON d.depcod=m.depcod
+WHERE d.depnom != 'Santander' AND ROWNUM <=2500;
+
+SELECT tpl.* 
+FROM tipolector tpl JOIN dispositivo disp ON tpl.tiplcod=disp.tiplcod JOIN obradispo odisp ON odisp.discod=disp.discod 
+JOIN obra o ON o.obrcod=odisp.obrcod JOIN municipio m ON m.muncod=o.muncod JOIN departamento d ON d.depcod=m.depcod
+WHERE d.depnom LIKE 'Santan%' AND ROWNUM <=2500;
+
+prompt *************1.2-FIN*******************
+
+prompt *************1.3-INICIO*******************
+
+SELECT con.*
+FROM contratista con JOIN contrato co ON con.concod=co.concod JOIN personal p ON p.percod=co.percod JOIN eps e ON e.epscod=p.epscod
+WHERE e.epsnom = 'Nueva Eps' AND ROWNUM <=2500;
+
+SELECT con.*
+FROM contratista con JOIN contrato co ON con.concod=co.concod JOIN personal p ON p.percod=co.percod JOIN eps e ON e.epscod=p.epscod
+WHERE e.epsnom != 'Nueva Eps' AND ROWNUM <=2500;
+
+SELECT con.*
+FROM contratista con JOIN contrato co ON con.concod=co.concod JOIN personal p ON p.percod=co.percod JOIN eps e ON e.epscod=p.epscod
+WHERE e.epsnom LIKE 'Nuev%' AND ROWNUM <=2500;
+
+prompt *************1.3-FIN*******************
+
+prompt *************2.1-INICIO*******************
+
+SELECT c.concod,c.connom,c.conape,c.concodan,c.conest,c.indmovil,c.indbloqueado,c.indsubcontr,COUNT(*) AS cuenta
+FROM contrato co JOIN contratista c ON co.concod=c.concod JOIN contel ct ON ct.concod=c.concod JOIN municipio m ON m.muncod=ct.muncod JOIN departamento d
+ON d.depcod=m.depcod JOIN pais p ON p.paicod=d.paicod
+GROUP BY c.concod,c.connom,c.conape,c.concodan,c.conest,c.indmovil,c.indbloqueado,c.indsubcontr
+HAVING COUNT(*) BETWEEN 2 AND 10;
+
+SELECT c.concod,c.connom,c.conape,c.concodan,c.conest,c.indmovil,c.indbloqueado,c.indsubcontr,COUNT(*) AS cuenta
+FROM contrato co JOIN contratista c ON co.concod=c.concod JOIN contel ct ON ct.concod=c.concod JOIN municipio m ON m.muncod=ct.muncod JOIN departamento d
+ON d.depcod=m.depcod JOIN pais p ON p.paicod=d.paicod
+GROUP BY c.concod,c.connom,c.conape,c.concodan,c.conest,c.indmovil,c.indbloqueado,c.indsubcontr
+HAVING COUNT(*) IN (2,3,4,5,6,7,8,9,10) ;
+
+SELECT c.concod,c.connom,c.conape,c.concodan,c.conest,c.indmovil,c.indbloqueado,c.indsubcontr,COUNT(*) AS cuenta
+FROM contrato co JOIN contratista c ON co.concod=c.concod JOIN contel ct ON ct.concod=c.concod JOIN municipio m ON m.muncod=ct.muncod JOIN departamento d
+ON d.depcod=m.depcod JOIN pais p ON p.paicod=d.paicod
+GROUP BY c.concod,c.connom,c.conape,c.concodan,c.conest,c.indmovil,c.indbloqueado,c.indsubcontr
+HAVING COUNT(*) >= 2 AND COUNT(*) <= 10 ;
+
+SELECT c.concod,c.connom,c.conape,c.concodan,c.conest,c.indmovil,c.indbloqueado,c.indsubcontr,COUNT(*) AS cuenta
+FROM contrato co JOIN contratista c ON co.concod=c.concod JOIN contel ct ON ct.concod=c.concod JOIN municipio m ON m.muncod=ct.muncod JOIN departamento d
+ON d.depcod=m.depcod JOIN pais p ON p.paicod=d.paicod
+GROUP BY c.concod,c.connom,c.conape,c.concodan,c.conest,c.indmovil,c.indbloqueado,c.indsubcontr
+HAVING COUNT(*) = 2 OR COUNT(*) = 3 OR COUNT(*)=4 OR COUNT(*)=5 OR COUNT(*) = 6 OR COUNT(*)=7 OR 
+COUNT(*)= 7 OR COUNT(*)= 8 OR COUNT(*)=9 OR COUNT(*)= 10 ;
+
+prompt *************2.1-FIN*******************
+
+prompt *************2.2-INICIO*******************
+
+SELECT de.depcod,d.discod,d.disnom,d.disip,d.disidint,d.distip,d.tiplcod,d.disotaipv,d.disotaex,COUNT(*) AS Cuenta
+FROM dispositivo d JOIN dispoinfo di ON d.discod=di.discod JOIN obra o ON o.obrcod=di.obrcod JOIN municipio m ON m.muncod=o.muncod JOIN departamento de ON
+de.depcod=m.depcod
+WHERE ROWNUM <=2500
+GROUP BY de.depcod,d.discod,d.disnom,d.disip,d.disidint,d.distip,d.tiplcod,d.disotaipv,d.disotaex
+HAVING COUNT(*) BETWEEN 2 AND 7 ; 
+
+SELECT de.depcod,d.discod,d.disnom,d.disip,d.disidint,d.distip,d.tiplcod,d.disotaipv,d.disotaex,COUNT(*) AS Cuenta
+FROM dispositivo d JOIN dispoinfo di ON d.discod=di.discod JOIN obra o ON o.obrcod=di.obrcod JOIN municipio m ON m.muncod=o.muncod JOIN departamento de ON
+de.depcod=m.depcod 
+WHERE ROWNUM <=2500
+GROUP BY de.depcod,d.discod,d.disnom,d.disip,d.disidint,d.distip,d.tiplcod,d.disotaipv,d.disotaex
+HAVING COUNT(*) IN (2,3,4,5,6,7) ;
+
+SELECT de.depcod,d.discod,d.disnom,d.disip,d.disidint,d.distip,d.tiplcod,d.disotaipv,d.disotaex,COUNT(*) AS Cuenta
+FROM dispositivo d JOIN dispoinfo di ON d.discod=di.discod JOIN obra o ON o.obrcod=di.obrcod JOIN municipio m ON m.muncod=o.muncod JOIN departamento de ON
+de.depcod=m.depcod
+WHERE ROWNUM <=2500
+GROUP BY de.depcod,d.discod,d.disnom,d.disip,d.disidint,d.distip,d.tiplcod,d.disotaipv,d.disotaex
+HAVING COUNT(*) >= 2 AND COUNT(*) <= 7;
+
+SELECT de.depcod,d.discod,d.disnom,d.disip,d.disidint,d.distip,d.tiplcod,d.disotaipv,d.disotaex,COUNT(*) AS Cuenta
+FROM dispositivo d JOIN dispoinfo di ON d.discod=di.discod JOIN obra o ON o.obrcod=di.obrcod JOIN municipio m ON m.muncod=o.muncod JOIN departamento de ON
+de.depcod=m.depcod
+WHERE ROWNUM <=2500
+GROUP BY de.depcod,d.discod,d.disnom,d.disip,d.disidint,d.distip,d.tiplcod,d.disotaipv,d.disotaex
+HAVING COUNT(*)= 2 OR COUNT(*)= 3 OR COUNT(*)= 4 OR COUNT(*)= 5 OR COUNT(*)= 6 OR COUNT(*)= 7 ;
+
+prompt *************2.2-FIN*******************
+
+prompt *************2.3-INICIO*******************
+
+SELECT c.cotcod,c.percod,c.concod,c.cotfecini,c.cotfecfin,c.cotactual,c.cotsalbas,c.cottip,c.peridcard,c.indmovil, COUNT(*) AS cuenta
+FROM contrato c JOIN contratista co ON c.concod=co.concod JOIN actcon ac ON ac.concod=co.concod JOIN actividad a ON a.actcod=ac.actcod
+WHERE ROWNUM <=2500
+GROUP BY c.cotcod,c.percod,c.concod,c.cotfecini,c.cotfecfin,c.cotactual,c.cotsalbas,c.cottip,c.peridcard,c.indmovil
+HAVING COUNT(*) BETWEEN 1 AND 10 ;
+
+SELECT c.cotcod,c.percod,c.concod,c.cotfecini,c.cotfecfin,c.cotactual,c.cotsalbas,c.cottip,c.peridcard,c.indmovil, COUNT(*) AS cuenta
+FROM contrato c JOIN contratista co ON c.concod=co.concod JOIN actcon ac ON ac.concod=co.concod JOIN actividad a ON a.actcod=ac.actcod
+WHERE ROWNUM <=2500
+GROUP BY c.cotcod,c.percod,c.concod,c.cotfecini,c.cotfecfin,c.cotactual,c.cotsalbas,c.cottip,c.peridcard,c.indmovil
+HAVING COUNT(*) IN (1,2,3,4,5,6,7,8,9,10);
+
+SELECT c.cotcod,c.percod,c.concod,c.cotfecini,c.cotfecfin,c.cotactual,c.cotsalbas,c.cottip,c.peridcard,c.indmovil, COUNT(*) AS cuenta
+FROM contrato c JOIN contratista co ON c.concod=co.concod JOIN actcon ac ON ac.concod=co.concod JOIN actividad a ON a.actcod=ac.actcod
+WHERE ROWNUM <=2500
+GROUP BY c.cotcod,c.percod,c.concod,c.cotfecini,c.cotfecfin,c.cotactual,c.cotsalbas,c.cottip,c.peridcard,c.indmovil
+HAVING COUNT(*) >= 1 AND COUNT(*) <= 10;
+
+SELECT c.cotcod,c.percod,c.concod,c.cotfecini,c.cotfecfin,c.cotactual,c.cotsalbas,c.cottip,c.peridcard,c.indmovil, COUNT(*) AS cuenta
+FROM contrato c JOIN contratista co ON c.concod=co.concod JOIN actcon ac ON ac.concod=co.concod JOIN actividad a ON a.actcod=ac.actcod
+WHERE ROWNUM <=2500
+GROUP BY c.cotcod,c.percod,c.concod,c.cotfecini,c.cotfecfin,c.cotactual,c.cotsalbas,c.cottip,c.peridcard,c.indmovil
+HAVING COUNT(*) = 1 OR COUNT(*) = 2 OR COUNT(*) = 3 OR COUNT(*)=4 OR COUNT(*)=5 OR COUNT(*) = 6 OR COUNT(*)=7 OR COUNT(*) = 7 OR COUNT(*) = 8 OR COUNT(*) =9 OR COUNT(*) = 10;
+
+prompt *************2.3-FIN*******************
+
+prompt *************3.1-INICIO*******************
+
+SELECT con.cotcod,con.percod,con.concod,con.cotfecini,con.cotfecfin,con.cotactual,con.cotsalbas,con.cottip,con.peridcard,con.indmovil,d.depnom
+FROM contrato con JOIN personal p ON con.percod=p.percod JOIN contratista cta ON cta.concod=con.concod 
+JOIN conobra cbra ON cbra.concod=cta.concod JOIN obra o ON o.obrcod=cbra.obrcod JOIN municipio m ON m.muncod=o.muncod 
+JOIN departamento d ON d.depcod=m.depcod 
+WHERE ROWNUM <=2500
+GROUP BY d.depnom,con.cotcod,con.percod,con.concod,con.cotfecini,con.cotfecfin,con.cotactual,con.cotsalbas,con.cottip,con.peridcard,con.indmovil;
+
+select * from v_1 WHERE ROWNUM <=2500;
+
+select * from v_m_1 WHERE ROWNUM <=2500;
+
+prompt *************3.2-INICIO*******************
+
+SELECT disp.discod,disp.disnom,disp.disip,disp.disidint,disp.distip,disp.tiplcod,disp.disotaipv,disp.disotaex, s.sucnom
+FROM dispositivo disp JOIN obradispo odisp ON disp.discod=odisp.discod JOIN obra o ON o.obrcod=odisp.obrcod 
+JOIN municipio m ON m.muncod=o.muncod JOIN sucursal s ON s.muncod=m.muncod
+WHERE ROWNUM <=2500
+GROUP BY s.sucnom,disp.discod,disp.disnom,disp.disip,disp.disidint,disp.distip,disp.tiplcod,disp.disotaipv,disp.disotaex;
+
+select * from v_2 WHERE ROWNUM <=2500;
+
+select * from v_m_2 WHERE ROWNUM <=2500;
+
+prompt *************3.2-FIN*******************
+
+prompt *************3.3-INICIO*******************
+
+SELECT r.rancod,r.rannom,COUNT(*)
+FROM rango r JOIN personal p ON r.rancod=p.rancod JOIN contrato c ON c.percod=p.percod JOIN contratista con ON c.concod=con.concod
+GROUP BY r.rancod,r.rannom
+HAVING COUNT(*)=
+(SELECT MAX(c) FROM (SELECT COUNT(*) AS c FROM rango r JOIN personal p ON r.rancod=p.rancod JOIN contrato c ON c.percod=p.percod 
+JOIN contratista con ON c.concod=con.concod
+GROUP BY r.rannom));
+
+select * from v_3;
+
+select * from v_m_3;
+
+prompt *************3.3-FIN*******************
+
+prompt *************3.4-INICIO*******************
+
+SELECT p.percod,o.obrcod, COUNT(*)
+FROM personal p JOIN contrato c on p.percod=c.percod JOIN controbra co ON co.cotcod=c.cotcod JOIN obra o ON o.obrcod=co.obrcod
+WHERE ROWNUM <=2500
+GROUP BY p.percod,o.obrcod;
+
+select * from v_4 WHERE ROWNUM <=2500;
+
+select * from v_m_4 WHERE ROWNUM <=2500;
+
+prompt *************3.4-FIN*******************
+
+prompt *************4.1-INICIO*******************
+
+SELECT a.* 
+FROM auditorialv a JOIN obra o ON a.obrcod=o.obrcod JOIN municipio m ON m.muncod=o.muncod JOIN departamento d ON d.depcod=m.depcod
+WHERE d.depnom = 'Cundinamarca' AND ROWNUM <=2500;
+
+SELECT a.auditorialvcod,a.usucod,a.obrcod,a.discod,a.fecproceso,a.tipoproceso,a.confirm,a.total,a.resultado,a.empcodmine,a.empcodmdi
+FROM auditorialv a JOIN obra o ON a.obrcod=o.obrcod JOIN municipio m ON m.muncod=o.muncod JOIN departamento d ON d.depcod=m.depcod
+WHERE d.depnom = 'Cundinamarca' AND ROWNUM <=2500;
+
+
+prompt *************4.1-FIN*******************
+
+prompt *************4.2-INICIO*******************
+
+SELECT p.*
+FROM personal p
+WHERE 2 <= (SELECT COUNT(*)
+FROM personal p1 JOIN contrato c ON p1.percod=c.percod JOIN controbra co ON co.cotcod=c.cotcod JOIN obra o ON o.obrcod=co.obrcod
+WHERE p1.percod=p.percod) AND ROWNUM <=2500;
+
+SELECT p.percod,p.pertdicod,p.peride,p.epscod,p.arpcod,p.pencod,p.rancod,p.peridcard,p.pernom,p.perape,p.perest
+FROM personal p
+WHERE 2 <= (SELECT COUNT(*)
+FROM personal p1 JOIN contrato c ON p1.percod=c.percod JOIN controbra co ON co.cotcod=c.cotcod JOIN obra o ON o.obrcod=co.obrcod
+WHERE p1.percod=p.percod) AND ROWNUM <=2500;
+
+prompt *************4.2-FIN*******************
+
+prompt *************4.3-INICIO*******************
+
+SELECT s.*
+FROM sucursal s JOIN municipio m ON s.muncod=m.muncod JOIN obra o ON o.muncod=m.muncod JOIN controbra co ON co.obrcod=o.obrcod JOIN contrato c
+ON c.cotcod=co.cotcod
+WHERE 3 > (SELECT COUNT(*)
+FROM sucursal s1 JOIN municipio m ON s1.muncod=m.muncod JOIN obra o ON o.muncod=m.muncod JOIN controbra co ON co.obrcod=o.obrcod JOIN contrato c
+ON c.cotcod=co.cotcod
+WHERE s1.succod=s.succod) AND ROWNUM <=2500;
+
+SELECT s.succod,s.sucnom,s.muncod
+FROM sucursal s JOIN municipio m ON s.muncod=m.muncod JOIN obra o ON o.muncod=m.muncod JOIN controbra co ON co.obrcod=o.obrcod JOIN contrato c
+ON c.cotcod=co.cotcod
+WHERE 3 > (SELECT COUNT(*)
+FROM sucursal s1 JOIN municipio m ON s1.muncod=m.muncod JOIN obra o ON o.muncod=m.muncod JOIN controbra co ON co.obrcod=o.obrcod JOIN contrato c
+ON c.cotcod=co.cotcod
+WHERE s1.succod=s.succod) AND ROWNUM <=2500;
+
+prompt *************4.3-FIN*******************
+
+prompt *************5.1-INICIO*******************
+
+SELECT ct.*
+FROM contrato ct JOIN contratista c ON ct.concod=c.concod JOIN contel co ON co.concod=c.concod JOIN municipio m ON m.muncod=co.muncod
+WHERE m.munnom='Bucaramanga' AND ROWNUM <=2500
+UNION
+SELECT ct.*
+FROM contrato ct JOIN contratista c ON ct.concod=c.concod JOIN contel co ON co.concod=c.concod JOIN municipio m ON m.muncod=co.muncod
+WHERE m.munnom='Cali' AND ROWNUM <=2500;
+
+SELECT ct.*
+FROM contrato ct JOIN contratista c ON ct.concod=c.concod JOIN contel co ON co.concod=c.concod JOIN municipio m ON m.muncod=co.muncod
+WHERE m.munnom='Bucaramanga' AND ROWNUM <=2500
+UNION ALL
+SELECT ct.*
+FROM contrato ct JOIN contratista c ON ct.concod=c.concod JOIN contel co ON co.concod=c.concod JOIN municipio m ON m.muncod=co.muncod
+WHERE m.munnom='Cali' AND ROWNUM <=2500;
+
+SELECT ct.*
+FROM contrato ct JOIN contratista c ON ct.concod=c.concod JOIN contel co ON co.concod=c.concod JOIN municipio m ON m.muncod=co.muncod
+WHERE m.munnom='Bucaramanga' OR m.munnom='Cali' AND ROWNUM <=2500;
+
+prompt *************5.1-FIN*******************
+
+prompt *************5.2-INICIO*******************
+
+SELECT p.*
+FROM personal p JOIN contrato c ON p.percod=c.percod JOIN controbra co ON co.cotcod=c.cotcod JOIN obra o ON o.obrcod=co.obrcod
+WHERE o.obrnom = 'PUERTA MAYOR' AND ROWNUM <=2500
+UNION
+SELECT p.*
+FROM personal p JOIN contrato c ON p.percod=c.percod JOIN controbra co ON co.cotcod=c.cotcod JOIN obra o ON o.obrcod=co.obrcod
+WHERE o.obrnom = 'MIRADOR DE VERSALLES' AND ROWNUM <=2500;
+
+SELECT p.*
+FROM personal p JOIN contrato c ON p.percod=c.percod JOIN controbra co ON co.cotcod=c.cotcod JOIN obra o ON o.obrcod=co.obrcod
+WHERE o.obrnom = 'PUERTA MAYOR' AND ROWNUM <=2500
+UNION ALL
+SELECT p.*
+FROM personal p JOIN contrato c ON p.percod=c.percod JOIN controbra co ON co.cotcod=c.cotcod JOIN obra o ON o.obrcod=co.obrcod
+WHERE o.obrnom = 'MIRADOR DE VERSALLES' AND ROWNUM <=2500;
+
+SELECT p.*
+FROM personal p JOIN contrato c ON p.percod=c.percod JOIN controbra co ON co.cotcod=c.cotcod JOIN obra o ON o.obrcod=co.obrcod
+WHERE (o.obrnom = 'PUERTA MAYOR' OR o.obrnom = 'MIRADOR DE VERSALLES') AND ROWNUM <=2500;
+
+prompt *************5.2-FIN*******************
+
+prompt *************5.3-INICIO*******************
+
+SELECT u.*
+FROM usuarios u JOIN usuobra us ON u.usucod=us.usuobracod JOIN obra o ON o.obrcod=us.obrcod JOIN municipio m ON m.muncod=o.muncod
+WHERE m.munnom='Bogota D.C.' AND ROWNUM <=2500
+UNION
+SELECT u.*
+FROM usuarios u JOIN usuobra us ON u.usucod=us.usuobracod JOIN obra o ON o.obrcod=us.obrcod JOIN municipio m ON m.muncod=o.muncod
+WHERE m.munnom='Barranquilla' AND ROWNUM <=2500;
+
+SELECT u.*
+FROM usuarios u JOIN usuobra us ON u.usucod=us.usuobracod JOIN obra o ON o.obrcod=us.obrcod JOIN municipio m ON m.muncod=o.muncod
+WHERE m.munnom='Bogota D.C.' AND ROWNUM <=2500
+UNION ALL
+SELECT u.*
+FROM usuarios u JOIN usuobra us ON u.usucod=us.usuobracod JOIN obra o ON o.obrcod=us.obrcod JOIN municipio m ON m.muncod=o.muncod
+WHERE m.munnom='Barranquilla' AND ROWNUM <=2500;
+
+SELECT u.*
+FROM usuarios u JOIN usuobra us ON u.usucod=us.usuobracod JOIN obra o ON o.obrcod=us.obrcod JOIN municipio m ON m.muncod=o.muncod
+WHERE (m.munnom='Bogota D.C.' OR m.munnom='Barranquilla') AND ROWNUM <=2500;
+
+prompt *************5.3-FIN*******************
+
+prompt *************6.1-INICIO*******************
+
+SELECT p.percod,p.pernom,p.perape,o.obrcod, COUNT(pl.concod)
+FROM personal p JOIN contrato c ON p.percod=c.percod JOIN controbra co ON co.cotcod=c.cotcod JOIN obra o ON o.obrcod=co.obrcod 
+JOIN contratista ct ON ct.concod=c.concod JOIN planilla pl ON pl.concod=ct.concod
+WHERE o.obrcod=2 
+GROUP BY p.percod,p.pernom,p.perape,o.obrcod;
+
+SELECT p.percod,p.pernom,p.perape,o.obrcod, COUNT(pl.concod)
+FROM personal p JOIN contrato c ON p.percod=c.percod JOIN controbra co ON co.cotcod=c.cotcod JOIN obra o ON o.obrcod=co.obrcod 
+JOIN contratista ct ON ct.concod=c.concod JOIN planilla pl ON pl.concod=ct.concod
+GROUP BY p.percod,p.pernom,p.perape,o.obrcod
+HAVING o.obrcod=2;
+
+prompt *************6.1-FIN*******************
+
+prompt *************6.2-INICIO*******************
+
+SELECT a.auditorialvcod,a.usucod,a.obrcod,a.discod,a.fecproceso,a.tipoproceso,a.confirm,a.total,a.resultado,a.empcodmine,a.empcodmdi
+FROM auditorialv a JOIN obra o ON a.obrcod=o.obrcod JOIN municipio m ON m.muncod=o.muncod JOIN departamento d ON d.depcod=m.depcod
+WHERE d.depnom = 'Cundinamarca' ;
+
+SELECT a.auditorialvcod,a.usucod,a.obrcod,a.discod,a.fecproceso,a.tipoproceso,a.confirm,a.total,a.resultado,a.empcodmine,a.empcodmdi
+FROM auditorialv a JOIN obra o ON a.obrcod=o.obrcod JOIN municipio m ON m.muncod=o.muncod JOIN departamento d ON d.depcod=m.depcod
+GROUP BY a.auditorialvcod,a.usucod,a.obrcod,a.discod,a.fecproceso,a.tipoproceso,a.confirm,a.total,a.resultado,a.empcodmine,a.empcodmdi,d.depnom 
+HAVING d.depnom = 'Cundinamarca';
+
+
+prompt *************6.2-FIN*******************
+
+prompt *************6.3-INICIO*******************
+
+SELECT p.*
+FROM personal p JOIN contrato c ON p.percod=c.percod JOIN controbra co ON co.cotcod=c.cotcod JOIN obra o ON o.obrcod=co.obrcod JOIN municipio m 
+ON m.muncod=o.muncod JOIN sucursal s ON s.muncod=m.muncod
+WHERE s.succod = 4 AND ROWNUM <=2500;
+
+SELECT p.percod, p.pertdicod,p.peride,p.epscod,p.arpcod,p.pencod,p.rancod,p.peridcard,p.pernom,p.perape,p.perest,s.succod 
+FROM personal p JOIN contrato c ON p.percod=c.percod JOIN controbra co ON co.cotcod=c.cotcod JOIN obra o ON o.obrcod=co.obrcod JOIN municipio m 
+ON m.muncod=o.muncod JOIN sucursal s ON s.muncod=m.muncod
+WHERE ROWNUM <=2500
+GROUP BY p.percod, p.pertdicod,p.peride,p.epscod,p.arpcod,p.pencod,p.rancod,p.peridcard,p.pernom,p.perape,p.perest,s.succod 
+HAVING s.succod = 4;
+
+
+prompt *************6.3-FIN*******************
+
+prompt *************7.1-INICIO*******************
+
+SELECT a.* 
+FROM auditorialv a JOIN obra o ON a.obrcod=o.obrcod JOIN municipio m ON m.muncod=o.muncod JOIN departamento d ON d.depcod=m.depcod
+WHERE d.depnom = 'Cundinamarca' AND ROWNUM <=2500;
+
+SELECT                  a.* 
+FROM                                     auditorialv             a         JOIN obra o ON a.obrcod=o.obrcod                          
+JOIN municipio m ON 
+                       m.muncod=o.muncod                                     JOIN departamento d                                ON d.depcod=m.depcod
+WHERE                                                        d.depnom =                                           'Cundinamarca' AND ROWNUM <=2500;
+
+
+SELECT A.* 
+FROM AUDITORIALV A JOIN OBRA O ON A.OBRCOD=O.OBRCOD JOIN MUNICIPIO M ON M.MUNCOD=O.MUNCOD JOIN DEPARTAMENTO D ON D.DEPCOD=M.DEPCOD
+WHERE D.DEPNOM = 'Cundinamarca' AND ROWNUM <=2500;
+
+select a.* 
+from auditorialv a join obra o on a.obrcod=o.obrcod join municipio m on m.muncod=o.muncod join departamento d on d.depcod=m.depcod
+where d.depnom = 'Cundinamarca' AND ROWNUM <=2500;
+
+
+seLEct a.* 
+from aUDITORIAlv a JOIN Obra o on a.oBRCOd=o.obrcod join MUNIcipio m on m.mUNCOd=o.muncod jOIN departameNTO d on d.dEPCOd=m.depcod 
+wHERE d.dePNOM = 'Cundinamarca' AND ROWNUM <=2500;
+
+prompt *************7.1-FIN*******************
+
+prompt *************7.2-INICIO*******************
+
+SELECT p.*
+FROM personal p
+WHERE 2 <= (SELECT COUNT(*)
+FROM personal p1 JOIN contrato c ON p1.percod=c.percod JOIN controbra co ON co.cotcod=c.cotcod JOIN obra o ON o.obrcod=co.obrcod
+WHERE p1.percod=p.percod) AND ROWNUM <=2500;
+
+SElECT            p.*
+FROM          personal                  p WHERE 2 
+<= (SELECT COUNT(*)
+FROM personal p1                                             JOIN contrato c ON p1.percod=c.percod 
+JOIN controbra co                                      ON co.cotcod=c.cotcod JOIN obra o 
+ON o.obrcod=co.obrcod
+WHERE                        p.percod=p.percod)                AND                         ROWNUM <=2500;
+
+SELECT P.*
+FROM PERSONAL P
+WHERE 2 <= (SELECT COUNT(*)
+FROM PERSONAL P1 JOIN CONTRATO C ON P1.PERCOD=C.PERCOD JOIN CONTROBRA CO ON CO.COTCOD=C.COTCOD JOIN OBRA O ON O.OBRCOD=CO.OBRCOD
+WHERE P1.PERCOD=P.PERCOD) AND ROWNUM <=2500;
+
+select p.*
+from personal p
+where 2 <= (select count(*)
+from personal p1 join contrato c on p1.percod=c.percod join controbra co on co.cotcod=c.cotcod join obra o on o.obrcod=co.obrcod
+where p1.percod=p.percod) AND ROWNUM <=2500;
+
+seLECt p.*
+fROM perSONal p
+WHere 2 <= (SELEct count(*)
+FROM Personal p1 JOIN CONTRATO c on p1.PERCOD=C.PERCOD join conTROBRA co on co.COTCOD=c.COTCOD join obra O ON O.OBRCOD=co.obrcod
+WHERE P1.PERCOD=p.percod) AND ROWNUM <=2500;
+
+prompt *************7.2-FIN*******************
+
+prompt *************7.3-INICIO*******************
+
+SELECT s.*
+FROM sucursal s JOIN municipio m ON s.muncod=m.muncod JOIN obra o ON o.muncod=m.muncod JOIN controbra co ON co.obrcod=o.obrcod JOIN contrato c
+ON c.cotcod=co.cotcod 
+WHERE 3 > (SELECT COUNT(*) 
+FROM sucursal s1 JOIN municipio m ON s1.muncod=m.muncod JOIN obra o ON o.muncod=m.muncod JOIN controbra co ON co.obrcod=o.obrcod JOIN contrato c
+ON c.cotcod=co.cotcod 
+WHERE s1.succod=s.succod) ;
+
+SELECT                   s.*
+FROM sucursal s JOIN                municipio m ON s.muncod=m.muncod JOIN              obra o ON o.muncod=m.muncod 
+JOIN controbra co                 ON co.obrcod=o.obrcod JOIN                 contrato c
+ON                     c.cotcod=co.cotcod 
+WHERE 3 > (SELECT                COUNT(*) 
+FROM sucursal            s1 JOIN municipio m ON s1.muncod=m.muncod           JOIN obra o ON o.muncod=m.muncod               JOIN controbra co 
+ON co.obrcod=o.obrcod               JOIN contrato c
+ON c.cotcod=                co.cotcod 
+WHERE s1.succod=s.succod) ;
+
+
+SELECT S.*
+FROM SUCURSAL S JOIN MUNICIPIO M ON S.MUNCOD=M.MUNCOD JOIN OBRA O ON O.MUNCOD=M.MUNCOD JOIN CONTROBRA CO ON CO.OBRCOD=O.OBRCOD JOIN CONTRATO C
+ON C.COTCOD=CO.COTCOD 
+WHERE 3 > (SELECT COUNT(*) 
+FROM SUCURSAL S1 JOIN MUNICIPIO M ON S1.MUNCOD=M.MUNCOD JOIN OBRA O ON O.MUNCOD=M.MUNCOD JOIN CONTROBRA CO ON CO.OBRCOD=O.OBRCOD JOIN CONTRATO C
+ON C.COTCOD=CO.COTCOD 
+WHERE S1.SUCCOD=S.SUCCOD) ;
+
+select s.*
+from sucursal s join municipio m on s.muncod=m.muncod join obra o on o.muncod=m.muncod join controbra co on co.obrcod=o.obrcod join contrato c
+on c.cotcod=co.cotcod 
+where 3 > (select count(*) 
+from sucursal s1 join municipio m on s1.muncod=m.muncod join obra o on o.muncod=m.muncod join controbra co on co.obrcod=o.obrcod join contrato c
+on c.cotcod=co.cotcod 
+where s1.succod=s.succod) ;
+
+select s.*
+from SUCursal s join mUNICipio m on s.MUNCOD=m.muncod join oBRa o on o.mUNCOd=m.mUNCod join coNTROBRA co on co.obRCOD=o.oBRCOD join contrato c
+on C.COTCOD=co.cotcod 
+where 3 > (SELECT COunt(*) 
+from SUCUrsal s1 join munICIPIO m on s1.muncod=m.mUNCOD join obra o on o.MUNCOD=M.MUNCOD join controbra co on co.OBRCOD=o.OBRCOD JOIN CONTRATO c
+on c.cotcod=co.cOTCOD 
+WHERE S1.SUccod=s.succod) ;
+
+prompt *************7.3-FIN*******************
+
+prompt *************8.1-INICIO*******************
+
+SELECT di.*
+FROM dispoinfo di JOIN obra o ON o.obrcod=di.obrcod JOIN municipio m ON m.muncod=o.muncod JOIN departamento d ON d.depcod=m.depcod JOIN 
+pais p ON p.paicod=d.paicod
+WHERE p.paicod= 87 AND ROWNUM <=2500;
+
+SELECT di.*
+FROM dispoinfo di JOIN obra o ON o.obrcod=di.obrcod JOIN municipio m ON m.muncod=o.muncod JOIN departamento d ON d.depcod=m.depcod JOIN 
+pais p ON p.paicod=d.paicod
+WHERE p.paicod= (10*2) - (3+5) + (400/4) + (1500/2) - (500*2)  + (1000-258+489-1200) + 194 + (500*2)  + (1000-258+489-1200) + 194 - 
+(500*2)  - (1000-258+489-1200) - 194 AND ROWNUM <=2500;
+
+prompt *************8.1-FIN*******************
+
+prompt *************8.2-INICIO*******************
+
+SELECT mi.*
+FROM minemdi mi JOIN auditorialv a ON mi.empcod=a.empcodmdi JOIN obra o ON o.obrcod=a.obrcod JOIN controbra co ON co.obrcod=o.obrcod
+WHERE a.obrcod=1 AND ROWNUM <=2500;
+
+SELECT mi.*
+FROM minemdi mi JOIN auditorialv a ON mi.empcod=a.empcodmdi JOIN obra o ON o.obrcod=a.obrcod JOIN controbra co ON co.obrcod=o.obrcod
+WHERE a.obrcod= (10*2) - (3+5) + (400/4) + (1500/2) - (500*2)  + (1000-258+489-1200) + 194 + (10*2) - (3+5) + (400/4) + (1500/2) - 
+(500*2)  + (1000-258+489-1200) + 194 + 1420 - 93 - 1500 AND ROWNUM <=2500;
+
+prompt *************8.2-FIN*******************
+
+prompt *************8.3-INICIO*******************
+
+SELECT p.*
+FROM personal p JOIN contrato c ON p.percod=c.percod JOIN controbra co ON co.cotcod=c.cotcod JOIN obra o ON o.obrcod=co.obrcod JOIN municipio m 
+ON m.muncod=o.muncod JOIN sucursal s ON s.muncod=m.muncod
+WHERE s.succod = 4 AND ROWNUM <=2500;
+
+SELECT p.*
+FROM personal p JOIN contrato c ON p.percod=c.percod JOIN controbra co ON co.cotcod=c.cotcod JOIN obra o ON o.obrcod=co.obrcod JOIN municipio m 
+ON m.muncod=o.muncod JOIN sucursal s ON s.muncod=m.muncod
+WHERE s.succod = (10*2) - (3+5) + (400/4) + (1500/2) - (500*2)  + (1000-258+489-1200) + 194 + (10*2) - (3+5) + (400/4) + (1500/2) - 
+(500*2)  + (1000-258+489-1200) + 194 + 1420 - 90 -1500 AND ROWNUM <=2500;
+
+prompt *************8.3-FIN*******************
+
+prompt *************9.1-INICIO*******************
+
+WITH cuentita AS(
+(SELECT COUNT(*) AS c FROM rango r JOIN personal p ON r.rancod=p.rancod JOIN contrato c ON c.percod=p.percod 
+JOIN contratista con ON c.concod=con.concod
+GROUP BY r.rannom)
+)
+SELECT r.rancod,r.rannom,COUNT(*)
+FROM rango r JOIN personal p ON r.rancod=p.rancod JOIN contrato c ON c.percod=p.percod JOIN contratista con ON c.concod=con.concod
+GROUP BY r.rancod,r.rannom
+HAVING COUNT(*)=(SELECT MAX(c) FROM cuentita);
+
+SELECT r.rancod,r.rannom,COUNT(*)
+FROM rango r JOIN personal p ON r.rancod=p.rancod JOIN contrato c ON c.percod=p.percod JOIN contratista con ON c.concod=con.concod
+GROUP BY r.rancod,r.rannom
+HAVING COUNT(*)=
+(SELECT MAX(c) FROM (SELECT COUNT(*) AS c FROM rango r JOIN personal p ON r.rancod=p.rancod JOIN contrato c ON c.percod=p.percod 
+JOIN contratista con ON c.concod=con.concod
+GROUP BY r.rannom));
+
+prompt *************9.1-FIN*******************
+
+prompt *************9.2-INICIO*******************
+
+WITH cuentita2 AS(
+SELECT COUNT(*) AS c FROM eps e JOIN personal p ON e.epscod=p.epscod JOIN contrato c ON c.percod=p.percod JOIN controbra co ON co.cotcod=c.cotcod JOIN obra o 
+ON o.obrcod=co.obrcod JOIN municipio m ON m.muncod=o.muncod JOIN departamento d ON d.depcod=m.depcod
+GROUP BY e.epscod,e.epsnom,d.depnom
+)
+SELECT e.epscod,e.epsnom,d.depnom,COUNT(*)
+FROM eps e JOIN personal p ON e.epscod=p.epscod JOIN contrato c ON c.percod=p.percod JOIN controbra co ON co.cotcod=c.cotcod JOIN obra o 
+ON o.obrcod=co.obrcod JOIN municipio m ON m.muncod=o.muncod JOIN departamento d ON d.depcod=m.depcod
+GROUP BY e.epscod,e.epsnom,d.depnom
+HAVING COUNT(*)=
+(SELECT MAX(c) FROM cuentita2);
+
+SELECT e.epscod,e.epsnom,d.depnom,COUNT(*)
+FROM eps e JOIN personal p ON e.epscod=p.epscod JOIN contrato c ON c.percod=p.percod JOIN controbra co ON co.cotcod=c.cotcod JOIN obra o 
+ON o.obrcod=co.obrcod JOIN municipio m ON m.muncod=o.muncod JOIN departamento d ON d.depcod=m.depcod
+GROUP BY e.epscod,e.epsnom,d.depnom
+HAVING COUNT(*)=
+(SELECT MAX(c) FROM (SELECT COUNT(*) AS c FROM eps e JOIN personal p ON e.epscod=p.epscod JOIN contrato c ON c.percod=p.percod JOIN controbra co ON co.cotcod=c.cotcod JOIN obra o 
+ON o.obrcod=co.obrcod JOIN municipio m ON m.muncod=o.muncod JOIN departamento d ON d.depcod=m.depcod
+GROUP BY e.epscod,e.epsnom,d.depnom));
+
+prompt *************9.2-FIN*******************
+
+prompt *************9.3-INICIO*******************
+
+WITH cuentita3 AS(
+SELECT COUNT(*) AS c FROM tipolector tpl JOIN dispositivo d ON tpl.tiplcod=d.tiplcod JOIN obradispo od ON od.discod=d.discod JOIN obra o ON o.obrcod=od.obrcod JOIN auditorialv au ON au.discod=d.discod 
+JOIN minemdi m ON m.empcod=au.empcodmdi
+GROUP BY tpl.tiplcod,tpl.tiplnom,tpl.tiplver,o.obrcod,o.obrnom
+)
+SELECT tpl.tiplcod,tpl.tiplnom,tpl.tiplver,o.obrcod,o.obrnom,COUNT(*)
+FROM tipolector tpl JOIN dispositivo d ON tpl.tiplcod=d.tiplcod JOIN obradispo od ON od.discod=d.discod JOIN obra o ON o.obrcod=od.obrcod JOIN auditorialv au ON au.discod=d.discod 
+JOIN minemdi m ON m.empcod=au.empcodmdi
+GROUP BY tpl.tiplcod,tpl.tiplnom,tpl.tiplver,o.obrcod,o.obrnom
+HAVING COUNT(*)=
+(SELECT MAX(c) FROM cuentita3);
+
+SELECT tpl.tiplcod,tpl.tiplnom,tpl.tiplver,o.obrcod,o.obrnom,COUNT(*)
+FROM tipolector tpl JOIN dispositivo d ON tpl.tiplcod=d.tiplcod JOIN obradispo od ON od.discod=d.discod JOIN obra o ON o.obrcod=od.obrcod JOIN auditorialv au ON au.discod=d.discod 
+JOIN minemdi m ON m.empcod=au.empcodmdi
+GROUP BY tpl.tiplcod,tpl.tiplnom,tpl.tiplver,o.obrcod,o.obrnom
+HAVING COUNT(*)=
+(SELECT MAX(c) FROM (SELECT COUNT(*) AS c FROM tipolector tpl JOIN dispositivo d ON tpl.tiplcod=d.tiplcod JOIN obradispo od ON od.discod=d.discod JOIN obra o ON o.obrcod=od.obrcod JOIN auditorialv au ON au.discod=d.discod 
+JOIN minemdi m ON m.empcod=au.empcodmdi
+GROUP BY tpl.tiplcod,tpl.tiplnom,tpl.tiplver,o.obrcod,o.obrnom));
+
+prompt *************9.3-FIN*******************
+
+prompt *************10.1-INICIO*******************
+
+SELECT p.percod, p.pertdicod,p.pernom,p.perape,pl.codplan
+FROM personal p JOIN contrato c ON c.percod=p.percod JOIN contratista con ON c.concod=con.concod JOIN planilla pl ON pl.concod=c.concod
+WHERE ROWNUM <=2500
+GROUP BY p.percod, p.pertdicod,p.pernom,p.perape,pl.codplan ;
+
+SELECT p.percod, p.pertdicod,p.pernom,p.perape,pl.codplan
+FROM personal p ,contrato c ,contratista con, planilla pl
+WHERE c.percod=p.percod AND c.concod=con.concod AND pl.concod=c.concod AND ROWNUM <=2500
+GROUP BY p.percod, p.pertdicod,p.pernom,p.perape,pl.codplan ;
+
+prompt *************10.1-FIN*******************
+
+prompt *************10.2-INICIO*******************
+
+SELECT p.percod,p.pertdicod,p.peride,p.epscod,p.arpcod,p.pencod,p.rancod,p.peridcard,p.pernom,p.perape,p.perest,d.depcod
+FROM personal p JOIN contrato c ON p.percod=c.percod JOIN controbra co ON co.cotcod=c.cotcod JOIN obra o ON o.obrcod=co.obrcod JOIN
+municipio m ON m.muncod=o.muncod JOIN departamento d ON d.depcod=m.depcod
+WHERE cotfecini= (SELECT MIN(cotfecini) from contrato) AND ROWNUM <=2500
+GROUP BY p.percod,p.pertdicod,p.peride,p.epscod,p.arpcod,p.pencod,p.rancod,p.peridcard,p.pernom,p.perape,p.perest,d.depcod;
+
+SELECT p.percod,p.pertdicod,p.peride,p.epscod,p.arpcod,p.pencod,p.rancod,p.peridcard,p.pernom,p.perape,p.perest,d.depcod
+FROM personal p, contrato c, controbra co, obra o, municipio m, departamento d 
+WHERE cotfecini= (SELECT MIN(cotfecini) from contrato) AND p.percod=c.percod AND co.cotcod=c.cotcod AND o.obrcod=co.obrcod 
+AND m.muncod=o.muncod AND d.depcod=m.depcod AND ROWNUM <=2500
+GROUP BY p.percod,p.pertdicod,p.peride,p.epscod,p.arpcod,p.pencod,p.rancod,p.peridcard,p.pernom,p.perape,p.perest,d.depcod,d.depcod;
+
+prompt *************10.2-FIN*******************
+
+prompt *************10.3-INICIO*******************
+
+SELECT nv.*
+FROM noveusus nv JOIN personal p ON nv.percod=p.percod JOIN contrato c ON c.percod=p.percod JOIN contratista co ON co.concod=c.concod
+JOIN planilla pl ON pl.concod=co.concod
+WHERE nv.nousisinc='true' AND ROWNUM <=2500;
+
+SELECT nv.*
+FROM noveusus nv, personal p, contrato c, contratista co, planilla pl 
+WHERE nv.nousisinc='true' AND nv.percod=p.percod AND c.percod=p.percod AND co.concod=c.concod AND pl.concod=co.concod AND ROWNUM <=2500;
+
+prompt *************10.3-FIN*******************
+
+prompt *************11.1-INICIO*******************
+
+SELECT p.*
+FROM personal p LEFT JOIN noveusus n ON p.percod=n.percod JOIN obra o ON o.obrcod=n.obrcod JOIN municipio m ON 
+m.muncod=o.muncod JOIN departamento d ON d.depcod=m.depcod
+WHERE d.depnom = 'Santander' AND ROWNUM <=2500;
+
+SELECT p.*
+FROM personal p, noveusus n , obra o , municipio m, departamento d
+WHERE d.depnom = 'Santander' AND p.percod=n.percod (+) AND o.obrcod=n.obrcod AND m.muncod=o.muncod AND d.depcod=m.depcod AND ROWNUM <=2500;
+
+prompt *************11.1-FIN*******************
+
+prompt *************11.2-INICIO*******************
+
+SELECT c.*
+FROM contrato c LEFT JOIN controbra co ON co.cotcod=c.cotcod JOIN obra o ON o.obrcod=co.obrcod
+WHERE EXTRACT(year FROM c.cotfecini) = 2014 AND ROWNUM <=2500;
+
+SELECT c.*
+FROM contrato c , controbra co , obra o 
+WHERE EXTRACT(year FROM c.cotfecini)= 2014 AND co.cotcod (+) = c.cotcod AND o.obrcod=co.obrcod AND ROWNUM <=2500;
+
+prompt *************11.2-FIN*******************
+
+prompt *************12.1-INICIO*******************
+
+SELECT p.percod, m.munnom, COUNT(*)
+FROM personal p JOIN contrato c ON p.percod=c.percod JOIN controbra co ON co.cotcod=c.cotcod JOIN obra o ON o.obrcod=co.obrcod 
+JOIN municipio m ON m.muncod=o.muncod
+WHERE ROWNUM <=2500
+GROUP BY p.percod,m.munnom;
+
+SELECT p.percod, m.munnom, COUNT(p.percod)
+FROM personal p JOIN contrato c ON p.percod=c.percod JOIN controbra co ON co.cotcod=c.cotcod JOIN obra o ON o.obrcod=co.obrcod 
+JOIN municipio m ON m.muncod=o.muncod
+WHERE ROWNUM <=2500
+GROUP BY p.percod,m.munnom;
+
+prompt *************12.1-FIN*******************
+
+prompt *************12.2-INICIO*******************
+
+SELECT tl.tiplnom, o.obrcod, COUNT(*)
+FROM tipolector tl JOIN dispositivo d ON d.tiplcod=tl.tiplcod JOIN dispoinfo di ON di.discod=d.discod JOIN obra o ON o.obrcod=di.obrcod
+WHERE ROWNUM <=2500
+GROUP BY tl.tiplnom, o.obrcod
+ORDER BY COUNT(*) DESC;
+
+SELECT tl.tiplnom, o.obrcod, COUNT(tl.tiplnom)
+FROM tipolector tl JOIN dispositivo d ON d.tiplcod=tl.tiplcod JOIN dispoinfo di ON di.discod=d.discod JOIN obra o ON o.obrcod=di.obrcod
+WHERE ROWNUM <=2500
+GROUP BY tl.tiplnom, o.obrcod
+ORDER BY COUNT(tl.tiplnom) DESC;
+
+prompt *************12.2-FIN*******************
+
+prompt *************12.3-INICIO*******************
+
+SELECT m.empcod,o.obrnom, COUNT(*)
+FROM minemdi m JOIN auditorialv a ON m.empcod=a.empcodmdi JOIN obra o ON o.obrcod=a.obrcod JOIN noveusus n ON n.obrcod=o.obrcod
+WHERE n.nousisinc='true' AND ROWNUM <=2500
+GROUP BY m.empcod,o.obrnom;
+
+SELECT m.empcod,o.obrnom, COUNT(m.empcod)
+FROM minemdi m JOIN auditorialv a ON m.empcod=a.empcodmdi JOIN obra o ON o.obrcod=a.obrcod JOIN noveusus n ON n.obrcod=o.obrcod
+WHERE n.nousisinc='true' AND ROWNUM <=2500
+GROUP BY m.empcod,o.obrnom;
+
+prompt *************12.3-FIN*******************
+
+/
+SET TIMING OFF;
+SPOOL OFF;
