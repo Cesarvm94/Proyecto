@@ -1,0 +1,391 @@
+CREATE TABLE actividad (
+actcod integer NOT NULL,
+actnom varchar2(250) NOT NULL,
+CONSTRAINT actcod_pk PRIMARY KEY(actcod)
+);
+
+CREATE TABLE arp (
+arpcod integer NOT NULL,
+arpnom varchar2(250) NOT NULL,
+CONSTRAINT arpcod_pk PRIMARY KEY(arpcod)
+);
+
+CREATE TABLE tipolector (
+tiplcod integer NOT NULL,
+tiplnom varchar2(250) NOT NULL,
+tiplver varchar2(10) NOT NULL,
+CONSTRAINT tiplcod_pk PRIMARY KEY(tiplcod)
+);
+
+CREATE TABLE contratista (
+concod varchar2(20) NOT NULL,
+connom varchar2(250) NOT NULL,
+conape varchar2(250) NOT NULL,
+concodan varchar2(20),
+conest varchar2(10) NOT NULL,
+indmovil varchar2(10) DEFAULT 'false' NOT NULL,
+indbloqueado varchar2(10) DEFAULT 'false' NOT NULL,
+indsubcontr varchar2(10) DEFAULT 'false' NOT NULL,
+CONSTRAINT concod_pk PRIMARY KEY(concod)
+);
+
+CREATE TABLE actcon (
+actconcod integer NOT NULL,
+actcod integer NOT NULL,
+concod varchar2(20) NOT NULL,
+CONSTRAINT actconcod_pk PRIMARY KEY(actconcod),
+CONSTRAINT fk_actconactividad FOREIGN KEY (actcod) REFERENCES actividad(actcod),
+CONSTRAINT fk_actconcontratista FOREIGN KEY (concod) REFERENCES contratista(concod)
+);
+
+CREATE TABLE dispositivo (
+discod integer NOT NULL,
+disnom varchar2(250) NOT NULL,
+disip varchar2(15),
+disidint integer NOT NULL,
+distip integer NOT NULL,
+tiplcod integer NOT NULL,
+disotaipv varchar2(11),
+disotaex varchar2(6),
+CONSTRAINT dispocod_pk PRIMARY KEY(discod),
+CONSTRAINT fk_dispositivotipolector FOREIGN KEY (tiplcod) REFERENCES tipolector(tiplcod)
+);
+
+CREATE TABLE eps (
+epscod integer NOT NULL,
+epsnom varchar2(250) NOT NULL,
+CONSTRAINT epscod_pk PRIMARY KEY(epscod)
+);
+
+CREATE TABLE menu (
+mencod integer NOT NULL,
+mendes varchar2(50) NOT NULL,
+menexc varchar2(300),
+mentip integer NOT NULL,
+menord integer NOT NULL,
+menpad integer NOT NULL,
+CONSTRAINT mencod_pk PRIMARY KEY(mencod)
+);
+
+CREATE TABLE mineemp (
+empcod integer NOT NULL,
+empnomcom varchar2(400) NOT NULL,
+empced varchar2(20) NOT NULL,
+empsalbas varchar2(100) NOT NULL,
+emparp varchar2(250) NOT NULL,
+empeps varchar2(250) NOT NULL,
+emppen varchar2(250) NOT NULL,
+empran varchar2(250),
+CONSTRAINT empcod_pk PRIMARY KEY(empcod)
+);
+
+CREATE TABLE minemdi (
+empcod integer NOT NULL,
+emloobr integer NOT NULL,
+emlofecin date NOT NULL,
+emlohorin varchar2(20),
+emlotarid varchar2(20),
+emlocon varchar2(20),
+emlofecout date,
+emlohorout varchar2(20),
+emloconnom varchar2(400) NOT NULL,
+emloobrnom varchar2(250) NOT NULL,
+emlohanov varchar2(10) NOT NULL,
+emlonored integer,
+emlonogreen integer,
+emlonoblue integer,
+emlodi integer NOT NULL,
+emlotipncod integer,
+emlocotcod integer NOT NULL,
+emlonobs varchar2(100),
+CONSTRAINT empecod_pk PRIMARY KEY(empcod)
+);
+
+CREATE TABLE operador (
+opecod integer NOT NULL,
+openom varchar2(50),
+CONSTRAINT opecod_pk PRIMARY KEY(opecod)
+);
+
+CREATE TABLE pais (
+paicod integer NOT NULL,
+painom varchar2(250) NOT NULL,
+paiind varchar2(10) NOT NULL,
+CONSTRAINT paicod_pk PRIMARY KEY(paicod)
+);
+
+CREATE TABLE departamento (
+depcod integer NOT NULL,
+depnom varchar2(250) NOT NULL,
+depdane varchar2(5) NOT NULL,
+paicod integer NOT NULL,
+CONSTRAINT depcod_pk PRIMARY KEY(depcod),
+CONSTRAINT fk_departamentopais FOREIGN KEY (paicod) REFERENCES pais(paicod)
+);
+
+CREATE TABLE municipio (
+muncod integer NOT NULL,
+munnom varchar2(250) NOT NULL,
+munindtel integer NOT NULL,
+depcod integer NOT NULL,
+mundane varchar2(5) NOT NULL,
+CONSTRAINT muncod_pk PRIMARY KEY(muncod),
+CONSTRAINT fk_municipiodepartamento FOREIGN KEY (depcod) REFERENCES departamento(depcod)
+);
+
+CREATE TABLE festivos (
+festcod integer NOT NULL,
+fesanio integer NOT NULL,
+fesmes integer NOT NULL,
+fesdia integer NOT NULL,
+paicod integer NOT NULL,
+CONSTRAINT festcod_pk PRIMARY KEY(festcod),
+CONSTRAINT fk_festivospais FOREIGN KEY (paicod) REFERENCES pais(paicod)
+);
+
+CREATE TABLE obra (
+obrcod integer NOT NULL,
+obrnom varchar2(250) NOT NULL,
+muncod integer NOT NULL,
+gerenteproy varchar2(100) DEFAULT '<no asignado>' NOT NULL,
+CONSTRAINT obrcod_pk PRIMARY KEY(obrcod),
+CONSTRAINT fk_obramunicipio FOREIGN KEY (muncod) REFERENCES municipio(muncod)
+);
+
+CREATE TABLE hc (
+codhc integer NOT NULL,
+nombrehc varchar2(250) NOT NULL,
+fechacarga date NOT NULL,
+obrcod integer NOT NULL,
+CONSTRAINT codhc_pk PRIMARY KEY(codhc),
+CONSTRAINT fk_hcobra FOREIGN KEY (obrcod) REFERENCES obra(obrcod)
+);
+
+CREATE TABLE dispoinfo (
+dispoinfocod integer NOT NULL,
+discod integer NOT NULL,
+peridcard varchar2(100) NOT NULL,
+dinfecreg date NOT NULL,
+dinhorreg varchar2(20),
+dinfecotr date,
+dinhorotr varchar2(20),
+obrcod integer NOT NULL,
+CONSTRAINT dispoinfocod_pk PRIMARY KEY(dispoinfocod),
+CONSTRAINT fk_dispoinfodispositivo FOREIGN KEY (discod) REFERENCES dispositivo(discod),
+CONSTRAINT fk_dispoinfoobra FOREIGN KEY (obrcod) REFERENCES obra(obrcod)
+);
+
+CREATE TABLE obradispo (
+obrdispcod integer NOT NULL,
+discod integer NOT NULL,
+obrcod integer NOT NULL,
+obdifecini date NOT NULL,
+obdifecfin date,
+obdiact varchar2(10) NOT NULL,
+CONSTRAINT obradiscod_pk PRIMARY KEY(obrdispcod),
+CONSTRAINT fk_obradispodispositivo FOREIGN KEY (discod) REFERENCES dispositivo(discod),
+CONSTRAINT fk_obradispoobra FOREIGN KEY (obrcod) REFERENCES obra(obrcod)
+);
+
+CREATE TABLE pension (
+pencod integer NOT NULL,
+pennom varchar2(250) NOT NULL,
+CONSTRAINT pencod_pk PRIMARY KEY(pencod)
+);
+
+CREATE TABLE rango (
+rancod integer NOT NULL,
+rannom varchar2(250) NOT NULL,
+CONSTRAINT rancod_pk PRIMARY KEY(rancod)
+);
+
+CREATE TABLE personal (
+percod integer NOT NULL,
+pertdicod varchar2(3) NOT NULL,
+peride varchar2(15) NOT NULL,
+epscod integer NOT NULL,
+arpcod integer NOT NULL,
+pencod integer NOT NULL,
+rancod integer NOT NULL,
+peridcard varchar2(100),
+pernom varchar2(150) NOT NULL,
+perape varchar2(150) NOT NULL,
+perest varchar2(10) NOT NULL,
+CONSTRAINT perscod_pk PRIMARY KEY(percod),
+CONSTRAINT fk_personaleps FOREIGN KEY (epscod) REFERENCES eps(epscod),
+CONSTRAINT fk_personalarp FOREIGN KEY (arpcod) REFERENCES arp(arpcod),
+CONSTRAINT fk_personalpension FOREIGN KEY (pencod) REFERENCES pension(pencod),
+CONSTRAINT fk_personalrango FOREIGN KEY (rancod) REFERENCES rango(rancod)
+);
+
+CREATE TABLE rol (
+rolcod integer NOT NULL,
+rolnom varchar2(250),
+CONSTRAINT rolcod_pk PRIMARY KEY(rolcod)
+);
+
+CREATE TABLE tiponovedad (
+tipncod integer NOT NULL,
+tipnnom varchar2(250) NOT NULL,
+tipndet varchar2(700) NOT NULL,
+tipninc varchar2(10) NOT NULL,
+tipnindnov varchar2(1) NOT NULL,
+tipncored varchar2(3),
+tipncogreen varchar2(3),
+tipncoblue varchar2(3),
+CONSTRAINT tipncod_pk PRIMARY KEY(tipncod)
+);
+
+CREATE TABLE usuarios (
+usucod integer NOT NULL,
+usunom varchar2(250) NOT NULL,
+usulog varchar2(15) NOT NULL,
+usucon varchar2(100) NOT NULL,
+usuest varchar2(10) NOT NULL,
+rolcod integer,
+CONSTRAINT usucod_pk PRIMARY KEY(usucod),
+CONSTRAINT fk_usuariosrol FOREIGN KEY (rolcod) REFERENCES rol(rolcod)
+);
+
+CREATE TABLE auditorialv (
+auditorialvcod integer NOT NULL,
+usucod integer NOT NULL,
+obrcod integer NOT NULL,
+discod integer NOT NULL,
+fecproceso date NOT NULL,
+horproceso varchar2(20),
+tipoproceso varchar2(15),
+confirm integer,
+total integer,
+resultado varchar2(120),
+empcodmine integer NOT NULL,
+empcodmdi integer NOT NULL,
+CONSTRAINT audalvcod_pk PRIMARY KEY(auditorialvcod),
+CONSTRAINT fk_auditorialvusuarios FOREIGN KEY (usucod) REFERENCES usuarios(usucod),
+CONSTRAINT fk_auditorialvobra FOREIGN KEY (obrcod) REFERENCES obra(obrcod),
+CONSTRAINT fk_auditorialvdispositivo FOREIGN KEY (discod) REFERENCES dispositivo(discod),
+CONSTRAINT fk_auditorialvminemdi FOREIGN KEY (empcodmdi) REFERENCES minemdi(empcod),
+CONSTRAINT fk_auditorialvmineemp FOREIGN KEY (empcodmine) REFERENCES mineemp(empcod)
+);
+
+CREATE TABLE conobra (
+conobracod integer NOT NULL,
+concod VARCHAR2(20) NOT NULL,
+obrcod integer NOT NULL,
+indbloqueado varchar2(10) DEFAULT 'false' NOT NULL,
+CONSTRAINT conobracod_pk PRIMARY KEY(conobracod),
+CONSTRAINT fk_conobracontratista FOREIGN KEY (concod) REFERENCES contratista(concod),
+CONSTRAINT fk_conobraobra FOREIGN KEY (obrcod) REFERENCES obra(obrcod)
+);
+
+CREATE TABLE contel (
+concod varchar2(20) NOT NULL,
+telcod integer NOT NULL,
+telnum varchar2(12) NOT NULL,
+muncod integer NOT NULL,
+CONSTRAINT telcod_pk PRIMARY KEY(telcod),
+CONSTRAINT fk_contelmunicipio FOREIGN KEY (muncod) REFERENCES municipio(muncod),
+CONSTRAINT fk_contelcontratista FOREIGN KEY (concod) REFERENCES contratista(concod)
+);
+
+CREATE TABLE contratistainfoss (
+coninfocod integer NOT NULL,
+concod VARCHAR2(20) NOT NULL,
+diahabil integer NOT NULL,
+fecproxpresent date NOT NULL,
+fecconfig date,
+obrcod integer DEFAULT 0 NOT NULL,
+CONSTRAINT coninfocod_pk PRIMARY KEY(coninfocod),
+CONSTRAINT fk_contrainfosscontra FOREIGN KEY (concod) REFERENCES contratista(concod),
+CONSTRAINT fk_contratistainfossobra FOREIGN KEY (obrcod) REFERENCES obra(obrcod)
+);
+
+CREATE TABLE contrato (
+cotcod integer NOT NULL,
+percod integer NOT NULL,
+concod varchar2(20) NOT NULL,
+cotfecini date NOT NULL,
+cotfecfin date,
+cotactual varchar2(10) NOT NULL,
+cotsalbas integer NOT NULL,
+cottip integer NOT NULL,
+peridcard varchar2(20),
+indmovil varchar2(10) DEFAULT 'false' NOT NULL,
+CONSTRAINT cotcod_pk PRIMARY KEY(cotcod),
+CONSTRAINT fk_contratopersonal FOREIGN KEY (percod) REFERENCES personal(percod),
+CONSTRAINT fk_contratocontratista FOREIGN KEY (concod) REFERENCES contratista(concod)
+);
+
+CREATE TABLE controbra (
+controbracod integer NOT NULL,
+cotcod integer NOT NULL,
+obrcod integer NOT NULL,
+coobest varchar2(1) NOT NULL,
+obrabase varchar2(10) DEFAULT 'true' NOT NULL,
+CONSTRAINT controbracod_pk PRIMARY KEY(controbracod),
+CONSTRAINT fk_controbracontrato FOREIGN KEY (cotcod) REFERENCES contrato(cotcod),
+CONSTRAINT fk_controbraobra FOREIGN KEY (obrcod) REFERENCES obra(obrcod)
+);
+
+CREATE TABLE noveusus (
+noveususcod integer NOT NULL,
+percod integer NOT NULL,
+tipncod integer NOT NULL,
+cotcod integer NOT NULL,
+obrcod integer NOT NULL,
+nousobs varchar2(700),
+usucod integer NOT NULL,
+nousfec date NOT NULL,
+nousisinc varchar2(10) NOT NULL,
+CONSTRAINT noveususcod_pk PRIMARY KEY(noveususcod),
+CONSTRAINT fk_noveususpersonal FOREIGN KEY (percod) REFERENCES personal(percod),
+CONSTRAINT fk_noveusustiponovedad FOREIGN KEY (tipncod) REFERENCES tiponovedad(tipncod),
+CONSTRAINT fk_noveususcontrato FOREIGN KEY (cotcod) REFERENCES contrato(cotcod),
+CONSTRAINT fk_noveususobra FOREIGN KEY (obrcod) REFERENCES obra(obrcod),
+CONSTRAINT fk_noveusususuarios FOREIGN KEY (usucod) REFERENCES usuarios(usucod)
+);
+
+CREATE TABLE permiso (
+percod integer NOT NULL,
+rolcod integer NOT NULL,
+mencod integer NOT NULL,
+peracc varchar2(10) NOT NULL,
+perfecasi date NOT NULL,
+perusuasi integer NOT NULL,
+CONSTRAINT percod_pk PRIMARY KEY(percod),
+CONSTRAINT fk_permisorol FOREIGN KEY (rolcod) REFERENCES rol(rolcod),
+CONSTRAINT fk_permisomenu FOREIGN KEY (mencod) REFERENCES menu(mencod)
+);
+
+
+CREATE TABLE planilla (
+codplan integer NOT NULL,
+concod varchar2(20),
+fecpresent date,
+opecod integer,
+numplan varchar2(30),
+observ varchar2(400),
+mespresent date,
+obrcod integer DEFAULT 0 NOT NULL,
+CONSTRAINT codplan_pk PRIMARY KEY(codplan),
+CONSTRAINT fk_planillacontratista FOREIGN KEY (concod) REFERENCES contratista(concod),
+CONSTRAINT fk_planillaoperador FOREIGN KEY (opecod) REFERENCES operador(opecod)
+);
+
+CREATE TABLE sucursal (
+succod integer NOT NULL,
+sucnom varchar2(250) NOT NULL,
+muncod integer NOT NULL,
+CONSTRAINT succod_pk PRIMARY KEY(succod),
+CONSTRAINT fk_sucursalmunicipio FOREIGN KEY (muncod) REFERENCES municipio(muncod)
+);
+
+CREATE TABLE usuobra (
+usuobracod integer NOT NULL,
+usucod integer NOT NULL,
+obrcod integer NOT NULL,
+CONSTRAINT usuobracod_pk PRIMARY KEY(usuobracod),
+CONSTRAINT fk_usuobrausuarios FOREIGN KEY (usucod) REFERENCES usuarios(usucod),
+CONSTRAINT fk_usuobraobra FOREIGN KEY (obrcod) REFERENCES obra(obrcod)
+);
+COMMIT;
