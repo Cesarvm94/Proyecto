@@ -1,0 +1,73 @@
+CREATE   INDEX im_act ON actividad (actcod,actnom);
+
+CREATE   INDEX im_con ON contratista (concod,connom,conape,concodan,conest,indmovil,indbloqueado,indsubcontr);
+
+CREATE   INDEX im_aco ON actcon (actconcod,actcod,concod);
+
+CREATE   INDEX im_arp ON arp (arpcod,arpnom);
+
+CREATE   INDEX im_eps ON eps (epscod,epsnom);
+
+CREATE   INDEX im_pen ON pension (pencod,pennom);
+
+CREATE   INDEX im_ran ON rango (rancod,rannom);
+
+CREATE   INDEX im_rol ON rol (rolcod,rolnom);
+
+CREATE   INDEX im_usu ON usuarios (usucod,usunom,usulog,usucon,usuest,rolcod);
+
+CREATE   INDEX im_men ON menu (mencod,mendes,menexc,mentip,menord,menpad);
+
+CREATE   INDEX im_perm ON permiso (percod,peracc,perfecasi,perusuasi,rolcod,mencod);
+
+CREATE   INDEX im_tpl ON tipolector (tiplcod,tiplnom,tiplver);
+
+CREATE   INDEX im_dis ON dispositivo (discod,disnom,disip,disidint,distip,tiplcod,disotaipv,disotaex);
+
+CREATE   INDEX im_pai ON pais (paicod,painom,paiind);
+
+CREATE   INDEX im_dep ON departamento (depcod,depnom,depdane,paicod);
+
+CREATE   INDEX im_mun ON municipio (muncod,munnom,munindtel,depcod,mundane);
+
+CREATE   INDEX im_ctl ON contel (telcod,telnum,muncod,concod);
+
+CREATE   INDEX im_obr ON obra (obrcod,obrnom,muncod,gerenteproy);
+
+CREATE   INDEX im_min ON mineemp (empcod,empnomcom,empced,empsalbas,emparp,empeps,emppen,empran);
+
+CREATE   INDEX im_mdi ON minemdi (empcod,emloobr,emlofecin,emlotarid,emlocon,emlofecout,emloconnom,emloobrnom,emlohanov,emlonored,emlonogreen,emlonoblue,emlodi,emlotipncod,emlonobs);
+
+CREATE   INDEX im_aud ON auditorialv (auditorialvcod,usucod,obrcod,discod,fecproceso,tipoproceso,confirm,total,resultado,empcodmine,empcodmdi);
+
+CREATE   INDEX im_cbr ON conobra (conobracod,concod,obrcod,indbloqueado);
+
+CREATE   INDEX im_css ON contratistainfoss (coninfocod,diahabil,fecproxpresent,fecconfig,concod,obrcod);
+
+CREATE   INDEX im_suc ON sucursal (succod,sucnom,muncod);
+
+CREATE   INDEX im_opr ON operador (opecod,openom);
+
+CREATE   INDEX im_pln ON planilla (codplan,concod,fecpresent,opecod,numplan,observ,mespresent,obrcod);
+
+CREATE   INDEX im_ftv ON festivos (festcod,fesanio,fesmes,fesdia,paicod);
+
+CREATE   INDEX im_hc ON hc (codhc,nombrehc,fechacarga,obrcod);
+
+CREATE   INDEX im_per ON personal (percod,pertdicod,peride,epscod,arpcod,pencod,rancod,peridcard,pernom,perape,perest);
+
+CREATE   INDEX im_ctro ON contrato (cotcod,percod,concod,cotfecini,cotfecfin,cotactual,cotsalbas,cottip,peridcard,indmovil);
+
+CREATE   INDEX im_cra ON controbra (controbracod,coobest,obrabase,cotcod,obrcod);
+
+CREATE   INDEX im_dfo ON dispoinfo (dispoinfocod,discod,peridcard,dinfecreg,dinhorreg,dinfecotr,dinhorotr,obrcod);
+
+CREATE   INDEX im_tnvd ON tiponovedad (tipncod,tipnnom,tipndet,tipninc,tipnindnov,tipncored,tipncogreen,tipncoblue);
+
+CREATE   INDEX im_nvus ON noveusus (noveususcod,percod,tipncod,cotcod,obrcod,nousobs,usucod,nousfec,nousisinc);
+
+CREATE   INDEX im_uobr ON usuobra (usuobracod,usucod,obrcod);
+
+CREATE   INDEX im_odpo ON obradispo (obrdispcod,obdifecini,obdiact,discod,obrcod);
+
+COMMIT;

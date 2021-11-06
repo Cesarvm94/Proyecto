@@ -1,0 +1,35 @@
+CREATE INDEX im_ran ON rango (rannom);
+
+CREATE INDEX im_tpl ON tipolector (tiplnom);
+
+CREATE INDEX im_pai ON pais (painom);
+
+CREATE INDEX im_dep ON departamento (depnom,paicod);
+
+CREATE INDEX im_mun ON municipio (munnom,depcod);
+
+CREATE INDEX im_obr ON obra (obrnom,muncod);
+
+CREATE INDEX im_suc ON sucursal (sucnom,muncod);
+
+CREATE INDEX im_per ON personal (pertdicod,peride,arpcod,epscod,rancod,perest,pernom,perape);
+
+CREATE INDEX im_ctro ON contrato (cotfecini,percod,concod);
+
+CREATE INDEX im_nvus ON noveusus (nousisinc,percod,tipncod,cotcod,obrcod,nousobs,usucod);
+
+CREATE INDEX im_plan ON planilla (concod,opecod);
+
+CREATE INDEX im_coa ON controbra (cotcod,obrcod);
+
+CREATE INDEX im_cona ON conobra (concod,obrcod);
+
+CREATE INDEX im_conact ON actcon (actcod,concod);
+
+CREATE INDEX im_odis ON obradispo (discod,obrcod);
+
+CREATE INDEX im_difo ON dispoinfo (discod,obrcod);
+
+CREATE INDEX im_aulv ON auditorialv (usucod,obrcod,discod,empcodmdi);
+
+COMMIT;

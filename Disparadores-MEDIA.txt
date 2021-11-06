@@ -1,0 +1,974 @@
+
+CREATE OR REPLACE TRIGGER t_act_b_insert BEFORE INSERT 
+  ON actividad FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_act_b_delete BEFORE DELETE 
+  ON actividad FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_act_b_update BEFORE UPDATE
+  ON actividad FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_act_a_insert AFTER INSERT 
+  ON actividad FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_act_a_delete AFTER DELETE 
+  ON actividad FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_act_a_update AFTER UPDATE
+  ON actividad FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_con_b_insert BEFORE INSERT 
+  ON contratista FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_con_b_delete BEFORE DELETE 
+  ON contratista FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_con_b_update BEFORE UPDATE
+  ON contratista FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_con_a_insert AFTER INSERT 
+  ON contratista FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_con_a_delete AFTER DELETE 
+  ON contratista FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_con_a_update AFTER UPDATE
+  ON contratista FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_actcon_b_insert BEFORE INSERT 
+  ON actcon FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_actcon_b_delete BEFORE DELETE 
+  ON actcon FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_actcon_b_update BEFORE UPDATE
+  ON actcon FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_actcon_a_insert AFTER INSERT 
+  ON actcon FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_actcon_a_delete AFTER DELETE 
+  ON actcon FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_actcon_a_update AFTER UPDATE
+  ON actcon FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_arp_b_insert BEFORE INSERT 
+  ON arp FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_arp_b_delete BEFORE DELETE 
+  ON arp FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_arp_b_update BEFORE UPDATE
+  ON arp FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_arp_a_insert AFTER INSERT 
+  ON arp FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_arp_a_delete AFTER DELETE 
+  ON arp FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_arp_a_update AFTER UPDATE
+  ON arp FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_eps_b_insert BEFORE INSERT 
+  ON eps FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_eps_b_delete BEFORE DELETE 
+  ON eps FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_eps_b_update BEFORE UPDATE
+  ON eps FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_eps_a_insert AFTER INSERT 
+  ON eps FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_eps_a_delete AFTER DELETE 
+  ON eps FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_eps_a_update AFTER UPDATE
+  ON eps FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_pens_b_insert BEFORE INSERT 
+  ON pension FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_pens_b_delete BEFORE DELETE 
+  ON pension FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_pens_b_update BEFORE UPDATE
+  ON pension FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_pens_a_insert AFTER INSERT 
+  ON pension FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_pens_a_delete AFTER DELETE 
+  ON pension FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_pens_a_update AFTER UPDATE
+  ON pension FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_ran_b_insert BEFORE INSERT 
+  ON rango FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_ran_b_delete BEFORE DELETE 
+  ON rango FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_ran_b_update BEFORE UPDATE
+  ON rango FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_ran_a_insert AFTER INSERT 
+  ON rango FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_ran_a_delete AFTER DELETE 
+  ON rango FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_ran_a_update AFTER UPDATE
+  ON rango FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_rol_b_insert BEFORE INSERT 
+  ON rol FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_rol_b_delete BEFORE DELETE 
+  ON rol FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_rol_b_update BEFORE UPDATE
+  ON rol FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_rol_a_insert AFTER INSERT 
+  ON rol FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_rol_a_delete AFTER DELETE 
+  ON rol FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_rol_a_update AFTER UPDATE
+  ON rol FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_usu_b_insert BEFORE INSERT 
+  ON usuarios FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_usu_b_delete BEFORE DELETE 
+  ON usuarios FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_usu_b_update BEFORE UPDATE
+  ON usuarios FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_usu_a_insert AFTER INSERT 
+  ON usuarios FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_usu_a_delete AFTER DELETE 
+  ON usuarios FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_usu_a_update AFTER UPDATE
+  ON usuarios FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_menu_b_insert BEFORE INSERT 
+  ON menu FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_menu_b_delete BEFORE DELETE 
+  ON menu FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_menu_b_update BEFORE UPDATE
+  ON menu FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_menu_a_insert AFTER INSERT 
+  ON menu FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_menu_a_delete AFTER DELETE 
+  ON menu FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_menu_a_update AFTER UPDATE
+  ON menu FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_perm_b_insert BEFORE INSERT 
+  ON permiso FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_perm_b_delete BEFORE DELETE 
+  ON permiso FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_perm_b_update BEFORE UPDATE
+  ON permiso FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_perm_a_insert AFTER INSERT 
+  ON permiso FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_perm_a_delete AFTER DELETE 
+  ON permiso FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_perm_a_update AFTER UPDATE
+  ON permiso FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_tile_b_insert BEFORE INSERT 
+  ON tipolector FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_tile_b_delete BEFORE DELETE 
+  ON tipolector FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_tile_b_update BEFORE UPDATE
+  ON tipolector FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_tile_a_insert AFTER INSERT 
+  ON tipolector FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_tile_a_delete AFTER DELETE 
+  ON tipolector FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_tile_a_update AFTER UPDATE
+  ON tipolector FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_disp_b_insert BEFORE INSERT 
+  ON dispositivo FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_disp_b_delete BEFORE DELETE 
+  ON dispositivo FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_disp_b_update BEFORE UPDATE
+  ON dispositivo FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_disp_a_insert AFTER INSERT 
+  ON dispositivo FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_disp_a_delete AFTER DELETE 
+  ON dispositivo FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_disp_a_update AFTER UPDATE
+  ON dispositivo FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_pais_b_insert BEFORE INSERT 
+  ON pais FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_pais_b_delete BEFORE DELETE 
+  ON pais FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_pais_b_update BEFORE UPDATE
+  ON pais FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_pais_a_insert AFTER INSERT 
+  ON pais FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_pais_a_delete AFTER DELETE 
+  ON pais FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_pais_a_update AFTER UPDATE
+  ON pais FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_depa_b_insert BEFORE INSERT 
+  ON departamento FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_depa_b_delete BEFORE DELETE 
+  ON departamento FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_depa_b_update BEFORE UPDATE
+  ON departamento FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_depa_a_insert AFTER INSERT 
+  ON departamento FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_depa_a_delete AFTER DELETE 
+  ON departamento FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_depa_a_update AFTER UPDATE
+  ON departamento FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_mun_b_insert BEFORE INSERT 
+  ON municipio FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_mun_b_delete BEFORE DELETE 
+  ON municipio FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_mun_b_update BEFORE UPDATE
+  ON municipio FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_mun_a_insert AFTER INSERT 
+  ON municipio FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_mun_a_delete AFTER DELETE 
+  ON municipio FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_mun_a_update AFTER UPDATE
+  ON municipio FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_contel_b_insert BEFORE INSERT 
+  ON contel FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_contel_b_delete BEFORE DELETE 
+  ON contel FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_contel_b_update BEFORE UPDATE
+  ON contel FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_contel_a_insert AFTER INSERT 
+  ON contel FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_contel_a_delete AFTER DELETE 
+  ON contel FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_contel_a_update AFTER UPDATE
+  ON contel FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_obra_b_insert BEFORE INSERT 
+  ON obra FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_obra_b_delete BEFORE DELETE 
+  ON obra FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_obra_b_update BEFORE UPDATE
+  ON obra FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZARÁ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_obra_a_insert AFTER INSERT 
+  ON obra FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    dbms_output.put_line('SE INSERTARÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_obra_a_delete AFTER DELETE 
+  ON obra FOR EACH ROW
+BEGIN
+  IF DELETING THEN
+    dbms_output.put_line('SE ELIMINÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER t_obra_a_update AFTER UPDATE
+  ON obra FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    dbms_output.put_line('SE ACTUALIZÓ UN REGISTRO');
+  END IF;
+END;
+/
+
+COMMIT;
